@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <input class="textfield" type="search" />
+      <button class="button">Найти</button>
+    </form>
+
+    <script>
+      const debounce = (fn, ms) => {
+        let timeout;
+
+        return function () {
+          const fnCall = () => {
+            fn.apply(this, arguments);
+          };
+
+          clearTimeout(timeout);
+
+          timeout = setTimeout(fnCall, ms);
+        };
+      };
+
+      function handleChange(e) {
+        console.log(e.target.value);
+      }
+
+      handleChange = debounce(handleChange, 500);
+
+      const textfield = document.querySelector('.textfield');
+      textfield.addEventListener('input', handleChange);
+    </script>
+  </body>
+</html>
